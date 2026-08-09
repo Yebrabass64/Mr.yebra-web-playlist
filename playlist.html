@@ -476,7 +476,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     await window.MrYebraSpotify.loadPlaylist();
 
-  function renderSpotifyTracks() {
+function renderSpotifyTracks() {
 
   const tracks =
     window.MrYebraSpotify.getTracks();
@@ -484,7 +484,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   trackList.innerHTML =
     '';
 
-  tracks.forEach(
+  // Mostrar solamente las 3 primeras canciones
+  const visibleTracks =
+    tracks.slice(0, 3);
+
+
+  visibleTracks.forEach(
     (track, index) => {
 
       const row =
@@ -494,10 +499,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         'spotify-track';
 
 
-      // -------------------------------------------------
-      // NÚMERO
-      // -------------------------------------------------
-
+      // Número de canción
       const number =
         document.createElement('div');
 
@@ -508,10 +510,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         index + 1;
 
 
-      // -------------------------------------------------
-      // INFORMACIÓN
-      // -------------------------------------------------
-
+      // Información de la canción
       const information =
         document.createElement('div');
 
@@ -519,10 +518,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         'spotify-track-information';
 
 
-      // -------------------------------------------------
-      // TÍTULO
-      // -------------------------------------------------
-
+      // Título
       const title =
         document.createElement('div');
 
@@ -533,10 +529,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         track.name;
 
 
-      // -------------------------------------------------
-      // ARTISTA
-      // -------------------------------------------------
-
+      // Artista
       const artist =
         document.createElement('div');
 
@@ -549,15 +542,13 @@ document.addEventListener('DOMContentLoaded', async () => {
           .join(', ');
 
 
-      // -------------------------------------------------
-      // DURACIÓN
-      // -------------------------------------------------
-
+      // Duración
       const duration =
         document.createElement('div');
 
       duration.className =
         'spotify-track-duration';
+
 
       const totalSeconds =
         Math.floor(
@@ -572,16 +563,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       const seconds =
         totalSeconds % 60;
 
+
       duration.textContent =
         `${minutes}:${seconds
           .toString()
           .padStart(2, '0')}`;
 
 
-      // -------------------------------------------------
-      // CONSTRUIR INFORMACIÓN
-      // -------------------------------------------------
-
+      // Colocar título + artista
       information.appendChild(
         title
       );
@@ -591,6 +580,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       );
 
 
+      // Construir la fila
       row.appendChild(
         number
       );
@@ -604,11 +594,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       );
 
 
-      // -------------------------------------------------
-      // REPRODUCIR AL PULSAR EL TÍTULO
-      // -------------------------------------------------
-
-      title.addEventListener(
+      // Pulsar en la fila reproduce la canción
+      row.addEventListener(
         'click',
         () => {
 
