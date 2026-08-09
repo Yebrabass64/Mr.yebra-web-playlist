@@ -1,1 +1,283 @@
+<!DOCTYPE html>
 
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Techno, House & Beyond | Mr. Yebra</title>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YJESLE8G6B"></script>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){dataLayer.push(arguments);}
+
+gtag('js', new Date());
+
+gtag('config', 'G-YJESLE8G6B');
+</script>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;
+
+n.push=n;
+n.loaded=!0;
+n.version='2.0';
+n.queue=[];
+
+t=b.createElement(e);
+t.async=!0;
+t.src=v;
+
+s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)
+}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '302281599484821');
+fbq('track', 'PageView');
+</script>
+
+<noscript>
+<img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=302281599484821&ev=PageView&noscript=1"
+/>
+</noscript>
+
+<!-- End Meta Pixel Code -->
+
+<!-- Estilos -->
+
+<link rel="stylesheet" href="style-common.css" />
+
+<link rel="stylesheet" href="style-playlist.css" />
+
+<!-- Fuentes -->
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+</head>
+
+
+<body class="playlist-page">
+
+
+<!-- Barra superior -->
+
+<header class="top-bar">
+
+<div class="logo">Mr. Yebra</div>
+
+
+<nav class="main-menu">
+
+<a href="index.html">Home</a>
+
+<a href="biografia.html">Biography</a>
+
+<a href="musica.html">Music</a>
+
+<a href="visuals.html">Visuals</a>
+
+<a href="https://www.youtube.com/@user-Mr._Yebra/featured"
+target="_blank"
+rel="noopener noreferrer">Videos</a>
+
+<a href="contacto.html">Contact</a>
+
+</nav>
+
+
+<!-- Botón menú hamburguesa -->
+
+<div class="menu-toggle"
+id="menu-toggle"
+aria-label="Abrir menú"
+role="button">
+
+<div></div>
+<div></div>
+<div></div>
+
+</div>
+
+
+<!-- Redes sociales -->
+
+<div class="social-icons">
+
+<a href="https://www.instagram.com/mr.yebra_/?hl=es"
+target="_blank"
+rel="noopener">
+
+<img src="omg/instagram.webp" alt="Instagram" />
+
+</a>
+
+
+<a href="https://www.facebook.com/mr.yebra"
+target="_blank"
+rel="noopener">
+
+<img src="omg/facebook.webp" alt="Facebook" />
+
+</a>
+
+
+<a href="https://www.tiktok.com/@mr.yebra"
+target="_blank"
+rel="noopener">
+
+<img src="omg/tiktok.webp" alt="TikTok" />
+
+</a>
+
+
+<a href="https://x.com/MrYebra78474"
+target="_blank"
+rel="noopener">
+
+<img src="omg/X.webp" alt="X" />
+
+</a>
+
+</div>
+
+</header>
+
+
+
+<!-- PLAYLIST -->
+
+<main class="playlist-main">
+
+
+<div class="playlist-card">
+
+
+<!-- Cabecera visual -->
+
+<div class="playlist-header">
+
+
+<div class="playlist-cover">
+
+<img
+src="omg/playlist-techno-house.webp"
+alt="Techno, House & Beyond"
+>
+
+</div>
+
+
+<div class="playlist-info">
+
+
+<a
+href="https://open.spotify.com/playlist/1rdrf0vx3g9IrVy8hKQqsR"
+target="_blank"
+rel="noopener noreferrer"
+class="playlist-title">
+
+Techno, House & Beyond
+
+</a>
+
+
+<a
+href="https://open.spotify.com/playlist/1rdrf0vx3g9IrVy8hKQqsR"
+target="_blank"
+rel="noopener noreferrer"
+class="playlist-artist">
+
+Mr. Yebra
+
+</a>
+
+
+<a
+href="https://open.spotify.com/playlist/1rdrf0vx3g9IrVy8hKQqsR"
+target="_blank"
+rel="noopener noreferrer"
+class="spotify-link">
+
+Open in Spotify
+
+</a>
+
+
+</div>
+
+</div>
+
+
+
+<!-- Spotify Embed -->
+
+<div class="spotify-player">
+
+<iframe
+src="https://open.spotify.com/embed/playlist/1rdrf0vx3g9IrVy8hKQqsR?utm_source=generator&theme=0"
+width="100%"
+height="520"
+frameBorder="0"
+allowfullscreen=""
+allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+loading="lazy">
+</iframe>
+
+</div>
+
+
+<!-- MORE MUSIC -->
+
+<a
+href="https://open.spotify.com/playlist/1rdrf0vx3g9IrVy8hKQqsR"
+target="_blank"
+rel="noopener noreferrer"
+class="more-music">
+
+MORE MUSIC
+
+</a>
+
+
+</div>
+
+</main>
+
+
+
+<!-- Script menú hamburguesa -->
+
+<script>
+
+const menuToggle =
+document.getElementById('menu-toggle');
+
+const mainMenu =
+document.querySelector('.main-menu');
+
+
+menuToggle.addEventListener('click', () => {
+
+mainMenu.classList.toggle('active');
+
+});
+
+</script>
+
+
+</body>
+
+</html>
