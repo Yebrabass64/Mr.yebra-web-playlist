@@ -222,39 +222,88 @@ Open in Spotify
 
 
 
-<!-- Spotify Embed -->
+<!-- Spotify Player -->
 
 <div class="spotify-player">
 
-<iframe
-src="https://open.spotify.com/embed/playlist/1rdrf0vx3g9IrVy8hKQqsR?utm_source=generator&theme=0"
-width="100%"
-height="520"
-frameBorder="0"
-allowfullscreen=""
-allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-loading="lazy">
-</iframe>
+  <div class="spotify-player-top">
+
+    <div class="spotify-player-title">
+      Techno, House & Beyond
+    </div>
+
+    <div class="spotify-player-artist">
+      <a
+        href="https://open.spotify.com/playlist/1rdrf0vx3g9IrVy8hKQqsR"
+        target="_blank"
+        rel="noopener noreferrer">
+        Mr. Yebra
+      </a>
+    </div>
+
+    <button
+      id="spotify-login"
+      class="spotify-login-button">
+      Conectar con Spotify
+    </button>
+
+  </div>
+
+
+  <div
+    id="spotify-status"
+    class="spotify-status">
+    Conecta tu cuenta de Spotify para reproducir las canciones.
+  </div>
+
+
+  <div
+    id="spotify-track-list"
+    class="spotify-track-list">
+  </div>
+
+
+  <div
+    id="spotify-current-track"
+    class="spotify-current-track">
+
+    <div
+      id="current-track-title"
+      class="current-track-title">
+      Selecciona una canción
+    </div>
+
+    <div
+      id="current-track-artist"
+      class="current-track-artist">
+      Mr. Yebra
+    </div>
+
+    <div class="player-controls">
+
+      <button
+        id="previous-track"
+        aria-label="Canción anterior">
+        ⏮
+      </button>
+
+      <button
+        id="play-pause-track"
+        aria-label="Reproducir o pausar">
+        ▶
+      </button>
+
+      <button
+        id="next-track"
+        aria-label="Siguiente canción">
+        ⏭
+      </button>
+
+    </div>
+
+  </div>
 
 </div>
-
-
-<!-- MORE MUSIC -->
-
-<a
-href="https://open.spotify.com/playlist/1rdrf0vx3g9IrVy8hKQqsR"
-target="_blank"
-rel="noopener noreferrer"
-class="more-music">
-
-MORE MUSIC
-
-</a>
-
-
-</div>
-
-</main>
 
 
 
@@ -276,7 +325,448 @@ mainMenu.classList.toggle('active');
 });
 
 </script>
+<!-- Spotify Web Playback SDK -->
 
+<script src="https://sdk.scdn.co/spotify-player.js"></script>
+
+<script src="js/spotify-player.js"></script>
+
+
+<script>
+
+document.addEventListener('DOMContentLoaded', async () => {
+
+  const loginButton =
+    document.getElementById('spotify-login');
+
+  const status =
+    document.getElementById('spotify-status');
+
+  const trackList =
+    document.getElementById('spotify-track-list');
+
+  const currentTitle =
+    document.getElementById('current-track-title');
+
+  const currentArtist =
+    document.getElementById('current-track-artist');
+
+  const playPauseButton =
+    document.getElementById('play-pause-track');
+
+  const previousButton =
+    document.getElementById('previous-track');
+
+  const nextButton =
+    document.getElementById('next-track');
+
+
+  // -------------------------------------------------------
+  // LOGIN
+  // -------------------------------------------------------
+
+  loginButton.addEventListener('click', () => {
+
+    window.MrYebraSpotify.login();
+
+  });
+
+
+  // -------------------------------------------------------
+  // COMPROBAR AUTORIZACIÓN DE SPOTIFY
+  // -------------------------------------------------------
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  const code =
+    params.get('code');
+
+  const state =
+    params.get('state');
+
+  const savedState =
+    localStorage.getItem(
+      'mr_yebra_spotify_state'
+    );
+
+
+  // -------------------------------------------------------
+  // SI SPOTIFY DEVUELVE UN CÓDIGO
+  // -------------------------------------------------------
+
+  if (code) {
+
+    if (
+      !state ||
+      !savedState ||
+      state !== savedState
+    ) {
+
+      status.textContent =
+        'Error de seguridad al conectar con Spotify.';
+
+      return;
+
+    }
+
+
+    try {
+
+      status.textContent =
+        'Conectando con Spotify...';
+
+
+      await exchangeSpotifyCode(code);
+
+
+      window.history.replaceState(
+        {},
+        document.title,
+        window.location.pathname
+      );
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      status.textContent =
+        'No se ha podido conectar con Spotify.';
+
+      return;
+
+    }
+
+  }
+
+
+  // -------------------------------------------------------
+  // COMPROBAR TOKEN
+  // -------------------------------------------------------
+
+  const token =
+    await window.MrYebraSpotify.getToken();
+
+
+  if (!token) {
+
+    status.textContent =
+      'Conecta tu cuenta de Spotify para reproducir las canciones.';
+
+    return;
+
+  }
+
+
+  // -------------------------------------------------------
+  // USUARIO CONECTADO
+  // -------------------------------------------------------
+
+  loginButton.style.display =
+    'none';
+
+  status.textContent =
+    'Cargando playlist...';
+
+
+  try {
+
+    await window.MrYebraSpotify.loadPlaylist();
+
+    renderSpotifyTracks();
+
+    status.textContent =
+      'Spotify conectado. Selecciona una canción para reproducirla.';
+
+
+    window.onSpotifyPlayerReady = () => {
+
+      status.textContent =
+        'Spotify conectado. Selecciona una canción para reproducirla.';
+
+    };
+
+
+    window.onSpotifyTrackChanged =
+      state => {
+
+        const track =
+          state.track_window.current_track;
+
+        currentTitle.textContent =
+          track.name;
+
+        currentArtist.textContent =
+          track.artists
+            .map(artist => artist.name)
+            .join(', ');
+
+        playPauseButton.textContent =
+          state.paused ? '▶' : 'Ⅱ';
+
+      };
+
+
+    window.MrYebraSpotify.createPlayer();
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    status.textContent =
+      'No se ha podido cargar la playlist.';
+
+  }
+
+
+  // -------------------------------------------------------
+  // CONTROLES
+  // -------------------------------------------------------
+
+  playPauseButton.addEventListener(
+    'click',
+    () => {
+
+      window.MrYebraSpotify.toggle();
+
+    }
+  );
+
+
+  previousButton.addEventListener(
+    'click',
+    () => {
+
+      window.MrYebraSpotify.previous();
+
+    }
+  );
+
+
+  nextButton.addEventListener(
+    'click',
+    () => {
+
+      window.MrYebraSpotify.next();
+
+    }
+  );
+
+
+  // -------------------------------------------------------
+  // MOSTRAR CANCIONES
+  // -------------------------------------------------------
+
+  function renderSpotifyTracks() {
+
+    const tracks =
+      window.MrYebraSpotify.getTracks();
+
+    trackList.innerHTML =
+      '';
+
+    tracks.forEach(
+      (track, index) => {
+
+        const row =
+          document.createElement('div');
+
+        row.className =
+          'spotify-track';
+
+
+        const number =
+          document.createElement('div');
+
+        number.className =
+          'spotify-track-number';
+
+        number.textContent =
+          index + 1;
+
+
+        const information =
+          document.createElement('div');
+
+        information.className =
+          'spotify-track-information';
+
+
+        const title =
+          document.createElement('div');
+
+        title.className =
+          'spotify-track-title';
+
+        title.textContent =
+          track.name;
+
+
+        const artist =
+          document.createElement('a');
+
+        artist.className =
+          'spotify-track-artist';
+
+        artist.textContent =
+          track.artists
+            .map(a => a.name)
+            .join(', ');
+
+        artist.href =
+          track.artists[0].external_urls.spotify;
+
+        artist.target =
+          '_blank';
+
+        artist.rel =
+          'noopener noreferrer';
+
+
+        information.appendChild(
+          title
+        );
+
+        information.appendChild(
+          artist
+        );
+
+
+        row.appendChild(
+          number
+        );
+
+        row.appendChild(
+          information
+        );
+
+
+        row.addEventListener(
+          'click',
+          () => {
+
+            window.MrYebraSpotify.play(
+              index
+            );
+
+          }
+        );
+
+
+        trackList.appendChild(
+          row
+        );
+
+      }
+    );
+
+  }
+
+
+  // -------------------------------------------------------
+  // INTERCAMBIAR CÓDIGO POR TOKEN
+  // -------------------------------------------------------
+
+  async function exchangeSpotifyCode(code) {
+
+    const codeVerifier =
+      localStorage.getItem(
+        'mr_yebra_spotify_code_verifier'
+      );
+
+
+    const response =
+      await fetch(
+        'https://accounts.spotify.com/api/token',
+        {
+          method: 'POST',
+
+          headers: {
+            'Content-Type':
+              'application/x-www-form-urlencoded'
+          },
+
+          body:
+            new URLSearchParams({
+
+              client_id:
+                '25bc848823fc4b17a3b82558cb4f2b2f',
+
+              grant_type:
+                'authorization_code',
+
+              code:
+                code,
+
+              redirect_uri:
+                'https://yebrabass64.github.io/Mr.yebra-web-playlist/playlist.html',
+
+              code_verifier:
+                codeVerifier
+
+            })
+
+        }
+      );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        'Error al obtener el token de Spotify.'
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    localStorage.setItem(
+      'mr_yebra_spotify_access_token',
+      data.access_token
+    );
+
+
+    if (data.refresh_token) {
+
+      localStorage.setItem(
+        'mr_yebra_spotify_refresh_token',
+        data.refresh_token
+      );
+
+    }
+
+
+    localStorage.setItem(
+      'mr_yebra_spotify_expires_at',
+
+      (
+        Date.now() +
+        data.expires_in * 1000
+      ).toString()
+
+    );
+
+
+    localStorage.removeItem(
+      'mr_yebra_spotify_code_verifier'
+    );
+
+    localStorage.removeItem(
+      'mr_yebra_spotify_state'
+    );
+
+  }
+
+});
+
+</script>
 
 </body>
 
