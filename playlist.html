@@ -476,195 +476,158 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     await window.MrYebraSpotify.loadPlaylist();
 
-    renderSpotifyTracks();
-
-    status.textContent =
-      'Spotify conectado. Selecciona una canción para reproducirla.';
-
-
-    window.onSpotifyPlayerReady = () => {
-
-      status.textContent =
-        'Spotify conectado. Selecciona una canción para reproducirla.';
-
-    };
-
-
-    window.onSpotifyTrackChanged =
-      state => {
-
-        const track =
-          state.track_window.current_track;
-
-        currentTitle.textContent =
-          track.name;
-
-        currentArtist.textContent =
-          track.artists
-            .map(artist => artist.name)
-            .join(', ');
-
-        playPauseButton.textContent =
-          state.paused ? '▶' : 'Ⅱ';
-
-      };
-
-
-    window.MrYebraSpotify.createPlayer();
-
-
-  } catch (error) {
-
-    console.error(error);
-
-    status.textContent =
-      'No se ha podido cargar la playlist.';
-
-  }
-
-
-  // -------------------------------------------------------
-  // CONTROLES
-  // -------------------------------------------------------
-
-  playPauseButton.addEventListener(
-    'click',
-    () => {
-
-      window.MrYebraSpotify.toggle();
-
-    }
-  );
-
-
-  previousButton.addEventListener(
-    'click',
-    () => {
-
-      window.MrYebraSpotify.previous();
-
-    }
-  );
-
-
-  nextButton.addEventListener(
-    'click',
-    () => {
-
-      window.MrYebraSpotify.next();
-
-    }
-  );
-
-
-  // -------------------------------------------------------
-  // MOSTRAR CANCIONES
-  // -------------------------------------------------------
-
   function renderSpotifyTracks() {
 
-    const tracks =
-      window.MrYebraSpotify.getTracks();
+  const tracks =
+    window.MrYebraSpotify.getTracks();
 
-    trackList.innerHTML =
-      '';
+  trackList.innerHTML =
+    '';
 
-    tracks.forEach(
-      (track, index) => {
+  tracks.forEach(
+    (track, index) => {
 
-        const row =
-          document.createElement('div');
+      const row =
+        document.createElement('div');
 
-        row.className =
-          'spotify-track';
-
-
-        const number =
-          document.createElement('div');
-
-        number.className =
-          'spotify-track-number';
-
-        number.textContent =
-          index + 1;
+      row.className =
+        'spotify-track';
 
 
-        const information =
-          document.createElement('div');
+      // -------------------------------------------------
+      // NÚMERO
+      // -------------------------------------------------
 
-        information.className =
-          'spotify-track-information';
+      const number =
+        document.createElement('div');
 
+      number.className =
+        'spotify-track-number';
 
-        const title =
-          document.createElement('div');
-
-        title.className =
-          'spotify-track-title';
-
-        title.textContent =
-          track.name;
+      number.textContent =
+        index + 1;
 
 
-        const artist =
-          document.createElement('a');
+      // -------------------------------------------------
+      // INFORMACIÓN
+      // -------------------------------------------------
 
-        artist.className =
-          'spotify-track-artist';
+      const information =
+        document.createElement('div');
 
-        artist.textContent =
-          track.artists
-            .map(a => a.name)
-            .join(', ');
-
-        artist.href =
-          track.artists[0].external_urls.spotify;
-
-        artist.target =
-          '_blank';
-
-        artist.rel =
-          'noopener noreferrer';
+      information.className =
+        'spotify-track-information';
 
 
-        information.appendChild(
-          title
+      // -------------------------------------------------
+      // TÍTULO
+      // -------------------------------------------------
+
+      const title =
+        document.createElement('div');
+
+      title.className =
+        'spotify-track-title';
+
+      title.textContent =
+        track.name;
+
+
+      // -------------------------------------------------
+      // ARTISTA
+      // -------------------------------------------------
+
+      const artist =
+        document.createElement('div');
+
+      artist.className =
+        'spotify-track-artist';
+
+      artist.textContent =
+        track.artists
+          .map(a => a.name)
+          .join(', ');
+
+
+      // -------------------------------------------------
+      // DURACIÓN
+      // -------------------------------------------------
+
+      const duration =
+        document.createElement('div');
+
+      duration.className =
+        'spotify-track-duration';
+
+      const totalSeconds =
+        Math.floor(
+          track.duration_ms / 1000
         );
 
-        information.appendChild(
-          artist
+      const minutes =
+        Math.floor(
+          totalSeconds / 60
         );
 
+      const seconds =
+        totalSeconds % 60;
 
-        row.appendChild(
-          number
-        );
-
-        row.appendChild(
-          information
-        );
-
-
-        row.addEventListener(
-          'click',
-          () => {
-
-            window.MrYebraSpotify.play(
-              index
-            );
-
-          }
-        );
+      duration.textContent =
+        `${minutes}:${seconds
+          .toString()
+          .padStart(2, '0')}`;
 
 
-        trackList.appendChild(
-          row
-        );
+      // -------------------------------------------------
+      // CONSTRUIR INFORMACIÓN
+      // -------------------------------------------------
 
-      }
-    );
+      information.appendChild(
+        title
+      );
 
-  }
+      information.appendChild(
+        artist
+      );
+
+
+      row.appendChild(
+        number
+      );
+
+      row.appendChild(
+        information
+      );
+
+      row.appendChild(
+        duration
+      );
+
+
+      // -------------------------------------------------
+      // REPRODUCIR AL PULSAR EL TÍTULO
+      // -------------------------------------------------
+
+      title.addEventListener(
+        'click',
+        () => {
+
+          window.MrYebraSpotify.play(
+            index
+          );
+
+        }
+      );
+
+
+      trackList.appendChild(
+        row
+      );
+
+    }
+  );
+
+}
 
 
   // -------------------------------------------------------
