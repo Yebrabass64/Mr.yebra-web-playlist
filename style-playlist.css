@@ -1,1 +1,506 @@
+/* =========================================================
+   PLAYLIST PAGE
+   Mr. Yebra
+   ========================================================= */
 
+
+/* ---------- Página ---------- */
+
+.playlist-page {
+
+  margin: 0;
+
+  min-height: 100vh;
+
+  background: #285987;
+
+  font-family: 'Poppins', sans-serif;
+
+  overflow-x: hidden;
+
+}
+
+
+/* ---------- Fondo azul con diagonal ---------- */
+
+.playlist-page::after {
+
+  content: "";
+
+  position: fixed;
+
+  left: 0;
+
+  bottom: 0;
+
+  width: 100%;
+
+  height: 80px;
+
+  background: #f5f5f5;
+
+  clip-path: polygon(
+    0 65%,
+    100% 100%,
+    100% 100%,
+    0 100%
+  );
+
+  z-index: 0;
+
+  pointer-events: none;
+
+}
+
+
+/* ---------- Contenedor principal ---------- */
+
+.playlist-main {
+
+  min-height: 100vh;
+
+  padding-top: 60px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: flex-start;
+
+  position: relative;
+
+  z-index: 1;
+
+  box-sizing: border-box;
+
+}
+
+
+/* ---------- Reproductor ---------- */
+
+.playlist-card {
+
+  width: min(900px, 88vw);
+
+  margin-top: 7vh;
+
+  margin-bottom: 60px;
+
+  background: #a92e21;
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  box-shadow: 0 20px 45px rgba(0,0,0,0.28);
+
+}
+
+
+/* ---------- Cabecera ---------- */
+
+.playlist-header {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 30px;
+
+  padding: 28px;
+
+  background: linear-gradient(
+    135deg,
+    #b73525,
+    #8d2018
+  );
+
+}
+
+
+/* ---------- Imagen ---------- */
+
+.playlist-cover {
+
+  width: 190px;
+
+  height: 190px;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+
+  border-radius: 8px;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.30);
+
+}
+
+
+.playlist-cover img {
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+
+}
+
+
+/* ---------- Información ---------- */
+
+.playlist-info {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+
+}
+
+
+.playlist-title {
+
+  color: white;
+
+  font-size: clamp(28px, 4vw, 46px);
+
+  font-weight: 600;
+
+  line-height: 1.05;
+
+  text-decoration: none;
+
+  margin-bottom: 10px;
+
+}
+
+
+.playlist-title:hover {
+
+  text-decoration: underline;
+
+}
+
+
+.playlist-artist {
+
+  color: white;
+
+  font-size: 17px;
+
+  font-weight: 600;
+
+  text-decoration: none;
+
+  margin-bottom: 18px;
+
+}
+
+
+.playlist-artist:hover {
+
+  text-decoration: underline;
+
+}
+
+
+/* ---------- Spotify ---------- */
+
+.spotify-link {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 10px 18px;
+
+  background: white;
+
+  color: #111;
+
+  border-radius: 30px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition: transform 0.2s ease;
+
+}
+
+
+.spotify-link:hover {
+
+  transform: scale(1.04);
+
+}
+
+
+/* ---------- Spotify Embed ---------- */
+
+.spotify-player {
+
+  width: 100%;
+
+  background: #a92e21;
+
+}
+
+
+.spotify-player iframe {
+
+  display: block;
+
+  width: 100%;
+
+  border: 0;
+
+  border-radius: 0;
+
+}
+
+
+/* ---------- MORE MUSIC ---------- */
+
+.more-music {
+
+  display: block;
+
+  width: fit-content;
+
+  margin: 28px auto 34px auto;
+
+  padding: 13px 28px;
+
+  border: 2px solid white;
+
+  border-radius: 2px;
+
+  color: white;
+
+  font-family: 'Orbitron', sans-serif;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+
+  text-decoration: none;
+
+  transition: all 0.25s ease;
+
+}
+
+
+.more-music:hover {
+
+  background: white;
+
+  color: #a92e21;
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+
+  .playlist-main {
+
+    padding-top: 60px;
+
+  }
+
+
+  .playlist-card {
+
+    width: 92vw;
+
+    margin-top: 5vh;
+
+  }
+
+
+  .playlist-header {
+
+    padding: 22px;
+
+    gap: 20px;
+
+  }
+
+
+  .playlist-cover {
+
+    width: 145px;
+
+    height: 145px;
+
+  }
+
+
+  .playlist-title {
+
+    font-size: 28px;
+
+  }
+
+
+  .playlist-artist {
+
+    font-size: 15px;
+
+  }
+
+
+  .spotify-player iframe {
+
+    height: 520px;
+
+  }
+
+}
+
+
+/* =========================================================
+   MÓVIL
+   ========================================================= */
+
+@media (max-width: 520px) {
+
+
+  .playlist-main {
+
+    padding-top: 60px;
+
+  }
+
+
+  .playlist-card {
+
+    width: 94vw;
+
+    margin-top: 4vh;
+
+    border-radius: 12px;
+
+  }
+
+
+  .playlist-header {
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+
+    padding: 25px 20px 22px;
+
+  }
+
+
+  .playlist-cover {
+
+    width: 155px;
+
+    height: 155px;
+
+  }
+
+
+  .playlist-info {
+
+    align-items: center;
+
+  }
+
+
+  .playlist-title {
+
+    font-size: 27px;
+
+    line-height: 1.1;
+
+  }
+
+
+  .playlist-artist {
+
+    font-size: 15px;
+
+  }
+
+
+  .spotify-link {
+
+    font-size: 13px;
+
+  }
+
+
+  .spotify-player iframe {
+
+    height: 520px;
+
+  }
+
+
+  .more-music {
+
+    margin-top: 24px;
+
+    margin-bottom: 28px;
+
+    font-size: 12px;
+
+    padding: 12px 22px;
+
+  }
+
+}
+
+
+/* =========================================================
+   MÓVIL MUY PEQUEÑO
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+
+  .playlist-cover {
+
+    width: 135px;
+
+    height: 135px;
+
+  }
+
+
+  .playlist-title {
+
+    font-size: 24px;
+
+  }
+
+
+  .playlist-player iframe {
+
+    height: 500px;
+
+  }
+
+}
