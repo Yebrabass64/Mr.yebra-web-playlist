@@ -219,9 +219,7 @@
 
   align-items: center;
 
-  position: absolute;
-  top: 20px;
-  right: 20px;
+  justify-content: center;
    
   padding: 10px 18px;
 
