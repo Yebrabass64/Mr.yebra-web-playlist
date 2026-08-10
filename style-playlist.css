@@ -12,7 +12,12 @@
 
   min-height: 100vh;
 
-  background: #285987;
+  background: linear-gradient(
+    180deg,
+    #8a1c28 0%,
+    #4b1d2d 45%,
+    #111827 100%
+);
 
   font-family: 'Poppins', sans-serif;
 
