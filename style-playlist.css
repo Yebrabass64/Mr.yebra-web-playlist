@@ -247,6 +247,24 @@
 
 }
 
+/* ---------- Spotify Directo ---------- */
+
+.playlist-header {
+    position: relative;
+}
+
+.spotify-direct-link {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 8px 14px;
+    background: white;
+    color: #111;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
 
 /* ---------- Spotify Embed ---------- */
 
