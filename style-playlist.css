@@ -597,9 +597,8 @@
     align-items: center;
     gap: 8px;
 }
-
-.spotify-save-text::after {
-    content: "+";
+   
+.spotify-plus {
     width: 22px;
     height: 22px;
     border: 2px solid #fff;
