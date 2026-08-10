@@ -571,9 +571,9 @@ mainMenu.classList.toggle('active');
 
 <!-- Spotify Web Playback SDK -->
 
-<script src="https://sdk.scdn.co/spotify-player.js"></script>
-
 <script src="js/spotify-player.js"></script>
+
+<script src="https://sdk.scdn.co/spotify-player.js"></script>
 
 
 <script>
@@ -992,7 +992,8 @@ document.addEventListener(
 
     await window.MrYebraSpotify.loadPlaylist();
 
-
+    window.MrYebraSpotify.createPlayer();
+    
     renderSpotifyTracks();
 
 
