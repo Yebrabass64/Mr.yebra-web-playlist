@@ -278,7 +278,10 @@
 /* ---------- Spotify Embed ---------- */
 
 .spotify-player {
-
+   
+    font-family: Arial, sans-serif;
+    font-weight: 400;
+   
   width: 100%;
 
   background: #a92e21;
