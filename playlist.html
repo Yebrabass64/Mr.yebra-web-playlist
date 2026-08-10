@@ -82,22 +82,28 @@ src="https://www.facebook.com/tr?id=302281599484821&ev=PageView&noscript=1"
 
 <style>
 
+/* =====================================================
+   LISTA DE CANCIONES
+   ===================================================== */
+
 .spotify-track-list {
   width: 100%;
 }
+
 
 .spotify-track {
 
   display: grid;
 
   grid-template-columns:
+    36px
     38px
     minmax(0, 1fr)
     auto;
 
   align-items: center;
 
-  gap: 12px;
+  gap: 8px;
 
   width: 100%;
 
@@ -117,6 +123,7 @@ src="https://www.facebook.com/tr?id=302281599484821&ev=PageView&noscript=1"
 
 }
 
+
 .spotify-track:hover {
 
   background-color:
@@ -124,6 +131,57 @@ src="https://www.facebook.com/tr?id=302281599484821&ev=PageView&noscript=1"
 
 }
 
+
+/* =====================================================
+   BOTÓN PLAY DE CADA CANCIÓN
+   ===================================================== */
+
+.spotify-track-play {
+
+  width: 32px;
+
+  height: 32px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: #fff;
+
+  font-size: 16px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  cursor: pointer;
+
+  padding: 0;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.15s ease;
+
+}
+
+
+.spotify-track-play:hover {
+
+  background-color:
+    rgba(255,255,255,0.16);
+
+  transform: scale(1.08);
+
+}
+
+
+/* =====================================================
+   NÚMERO DE CANCIÓN
+   ===================================================== */
 
 .spotify-track-number {
 
@@ -136,6 +194,10 @@ src="https://www.facebook.com/tr?id=302281599484821&ev=PageView&noscript=1"
 
 }
 
+
+/* =====================================================
+   INFORMACIÓN
+   ===================================================== */
 
 .spotify-track-information {
 
@@ -189,6 +251,10 @@ src="https://www.facebook.com/tr?id=302281599484821&ev=PageView&noscript=1"
 }
 
 
+/* =====================================================
+   DURACIÓN
+   ===================================================== */
+
 .spotify-track-duration {
 
   min-width: 48px;
@@ -203,18 +269,161 @@ src="https://www.facebook.com/tr?id=302281599484821&ev=PageView&noscript=1"
 }
 
 
-@media (max-width: 600px) {
+/* =====================================================
+   CONTROLES SUPERIORES
+   ===================================================== */
+
+.spotify-player-top {
+
+  position: relative;
+
+}
+
+
+.spotify-player-controls {
+
+  position: absolute;
+
+  top: 50%;
+
+  right: 24px;
+
+  transform: translateY(-50%);
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+}
+
+
+.spotify-player-controls button {
+
+  border: none;
+
+  background: transparent;
+
+  color: #fff;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 6px;
+
+  font-size: 22px;
+
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
+
+}
+
+
+.spotify-player-controls button:hover {
+
+  transform: scale(1.12);
+
+  opacity: 0.8;
+
+}
+
+
+.spotify-player-controls #play-pause-track {
+
+  width: 46px;
+
+  height: 46px;
+
+  border-radius: 50%;
+
+  background: #fff;
+
+  color: #222;
+
+  font-size: 20px;
+
+}
+
+
+.spotify-player-controls #play-pause-track:hover {
+
+  opacity: 1;
+
+  transform: scale(1.06);
+
+}
+
+
+/* =====================================================
+   ESTADO / CANCIÓN ACTUAL
+   ===================================================== */
+
+.spotify-status {
+
+  padding-left: 0;
+
+  padding-right: 0;
+
+}
+
+
+/* =====================================================
+   ELIMINAR CONTROLES INFERIORES
+   ===================================================== */
+
+.spotify-current-track .player-controls {
+
+  display: none;
+
+}
+
+
+/* =====================================================
+   MÓVIL
+   ===================================================== */
+
+@media (max-width: 700px) {
 
   .spotify-track {
 
     grid-template-columns:
-      28px
+      32px
+      30px
       minmax(0, 1fr)
       auto;
 
-    gap: 8px;
+    gap: 6px;
 
     padding: 10px 12px;
+
+  }
+
+
+  .spotify-player-controls {
+
+    position: static;
+
+    transform: none;
+
+    margin-top: 15px;
+
+    justify-content: flex-end;
+
+  }
+
+
+  .spotify-player-top {
+
+    display: flex;
+
+    flex-direction: column;
 
   }
 
@@ -468,6 +677,44 @@ Conectar con Spotify
 </button>
 
 
+<!-- CONTROLES SUPERIORES -->
+
+<div class="spotify-player-controls">
+
+
+<button
+id="previous-track"
+aria-label="Canción anterior"
+title="Canción anterior">
+
+⏮
+
+</button>
+
+
+<button
+id="play-pause-track"
+aria-label="Reproducir o pausar"
+title="Reproducir o pausar">
+
+▶
+
+</button>
+
+
+<button
+id="next-track"
+aria-label="Siguiente canción"
+title="Siguiente canción">
+
+⏭
+
+</button>
+
+
+</div>
+
+
 </div>
 
 
@@ -510,39 +757,6 @@ Mr. Yebra
 </div>
 
 
-<div class="player-controls">
-
-
-<button
-id="previous-track"
-aria-label="Canción anterior">
-
-⏮
-
-</button>
-
-
-<button
-id="play-pause-track"
-aria-label="Reproducir o pausar">
-
-▶
-
-</button>
-
-
-<button
-id="next-track"
-aria-label="Siguiente canción">
-
-⏭
-
-</button>
-
-
-</div>
-
-
 </div>
 
 </div>
@@ -571,9 +785,9 @@ mainMenu.classList.toggle('active');
 
 <!-- Spotify Web Playback SDK -->
 
-<script src="js/spotify-player.js"></script>
-
 <script src="https://sdk.scdn.co/spotify-player.js"></script>
+
+<script src="js/spotify-player.js"></script>
 
 
 <script>
@@ -631,7 +845,6 @@ document.addEventListener(
     );
 
 
-
   // -------------------------------------------------------
   // LOGIN
   // -------------------------------------------------------
@@ -645,6 +858,130 @@ document.addEventListener(
     }
   );
 
+
+  // -------------------------------------------------------
+  // CONTROLES DEL REPRODUCTOR
+  // -------------------------------------------------------
+
+  playPauseButton.addEventListener(
+    'click',
+    async () => {
+
+      await window.MrYebraSpotify.toggle();
+
+    }
+  );
+
+
+  previousButton.addEventListener(
+    'click',
+    async () => {
+
+      await window.MrYebraSpotify.previous();
+
+    }
+  );
+
+
+  nextButton.addEventListener(
+    'click',
+    async () => {
+
+      await window.MrYebraSpotify.next();
+
+    }
+  );
+
+
+  // -------------------------------------------------------
+  // ACTUALIZAR INFORMACIÓN DEL REPRODUCTOR
+  // -------------------------------------------------------
+
+  window.onSpotifyTrackChanged =
+    (state) => {
+
+      if (!state || !state.track_window) {
+        return;
+      }
+
+
+      const track =
+        state.track_window.current_track;
+
+
+      if (!track) {
+        return;
+      }
+
+
+      currentTitle.textContent =
+        track.name;
+
+
+      currentArtist.textContent =
+        track.artists
+          .map(
+            artist => artist.name
+          )
+          .join(', ');
+
+
+      playPauseButton.textContent =
+        state.paused
+          ? '▶'
+          : '❚❚';
+
+
+      updateTrackButtons(
+        track.uri,
+        state.paused
+      );
+
+    };
+
+
+  // -------------------------------------------------------
+  // ACTUALIZAR BOTONES DE LAS CANCIONES
+  // -------------------------------------------------------
+
+  function updateTrackButtons(
+    currentUri,
+    paused
+  ) {
+
+    const buttons =
+      document.querySelectorAll(
+        '.spotify-track-play'
+      );
+
+
+    buttons.forEach(
+      button => {
+
+        const trackUri =
+          button.dataset.trackUri;
+
+
+        if (
+          trackUri === currentUri
+        ) {
+
+          button.textContent =
+            paused
+              ? '▶'
+              : '❚❚';
+
+        } else {
+
+          button.textContent =
+            '▶';
+
+        }
+
+      }
+    );
+
+  }
 
 
   // -------------------------------------------------------
@@ -669,7 +1006,6 @@ document.addEventListener(
     localStorage.getItem(
       'mr_yebra_spotify_state'
     );
-
 
 
   // -------------------------------------------------------
@@ -731,7 +1067,6 @@ document.addEventListener(
   }
 
 
-
   // -------------------------------------------------------
   // COMPROBAR TOKEN
   // -------------------------------------------------------
@@ -752,7 +1087,6 @@ document.addEventListener(
   }
 
 
-
   // -------------------------------------------------------
   // USUARIO CONECTADO
   // -------------------------------------------------------
@@ -763,7 +1097,6 @@ document.addEventListener(
 
   status.textContent =
     'Cargando playlist...';
-
 
 
   // -------------------------------------------------------
@@ -787,12 +1120,13 @@ document.addEventListener(
       tracks.slice(0, 3);
 
 
-
     visibleTracks.forEach(
       (track, index) => {
 
 
+        // ------------------------------------------------
         // Crear fila
+        // ------------------------------------------------
 
         const row =
           document.createElement(
@@ -803,6 +1137,37 @@ document.addEventListener(
         row.className =
           'spotify-track';
 
+
+        // ------------------------------------------------
+        // BOTÓN PLAY
+        // ------------------------------------------------
+
+        const playButton =
+          document.createElement(
+            'button'
+          );
+
+
+        playButton.className =
+          'spotify-track-play';
+
+
+        playButton.textContent =
+          '▶';
+
+
+        playButton.type =
+          'button';
+
+
+        playButton.dataset.trackUri =
+          track.uri;
+
+
+        playButton.setAttribute(
+          'aria-label',
+          'Reproducir ' + track.name
+        );
 
 
         // ------------------------------------------------
@@ -823,7 +1188,6 @@ document.addEventListener(
           index + 1;
 
 
-
         // ------------------------------------------------
         // Información
         // ------------------------------------------------
@@ -836,7 +1200,6 @@ document.addEventListener(
 
         information.className =
           'spotify-track-information';
-
 
 
         // ------------------------------------------------
@@ -855,7 +1218,6 @@ document.addEventListener(
 
         title.textContent =
           track.name;
-
 
 
         // ------------------------------------------------
@@ -878,7 +1240,6 @@ document.addEventListener(
               a => a.name
             )
             .join(', ');
-
 
 
         // ------------------------------------------------
@@ -917,7 +1278,6 @@ document.addEventListener(
             .padStart(2, '0')}`;
 
 
-
         // ------------------------------------------------
         // Construir información
         // ------------------------------------------------
@@ -932,10 +1292,14 @@ document.addEventListener(
         );
 
 
-
         // ------------------------------------------------
         // Construir fila
         // ------------------------------------------------
+
+        row.appendChild(
+          playButton
+        );
+
 
         row.appendChild(
           number
@@ -952,16 +1316,18 @@ document.addEventListener(
         );
 
 
-
         // ------------------------------------------------
-        // Reproducir al pulsar la fila
+        // BOTÓN PLAY DE LA CANCIÓN
         // ------------------------------------------------
 
-        row.addEventListener(
+        playButton.addEventListener(
           'click',
-          () => {
+          async (event) => {
 
-            window.MrYebraSpotify.play(
+            event.stopPropagation();
+
+
+            await window.MrYebraSpotify.play(
               index
             );
 
@@ -969,8 +1335,25 @@ document.addEventListener(
         );
 
 
+        // ------------------------------------------------
+        // PULSAR LA FILA
+        // ------------------------------------------------
 
-        // Añadir fila a la lista
+        row.addEventListener(
+          'click',
+          async () => {
+
+            await window.MrYebraSpotify.play(
+              index
+            );
+
+          }
+        );
+
+
+        // ------------------------------------------------
+        // Añadir fila
+        // ------------------------------------------------
 
         trackList.appendChild(
           row
@@ -982,7 +1365,6 @@ document.addEventListener(
   }
 
 
-
   // -------------------------------------------------------
   // CARGAR PLAYLIST
   // -------------------------------------------------------
@@ -992,8 +1374,10 @@ document.addEventListener(
 
     await window.MrYebraSpotify.loadPlaylist();
 
+
     window.MrYebraSpotify.createPlayer();
-    
+
+
     renderSpotifyTracks();
 
 
@@ -1012,7 +1396,6 @@ document.addEventListener(
 
 
   }
-
 
 
   // -------------------------------------------------------
@@ -1074,7 +1457,6 @@ document.addEventListener(
       );
 
 
-
     if (!response.ok) {
 
 
@@ -1086,17 +1468,14 @@ document.addEventListener(
     }
 
 
-
     const data =
       await response.json();
-
 
 
     localStorage.setItem(
       'mr_yebra_spotify_access_token',
       data.access_token
     );
-
 
 
     if (data.refresh_token) {
@@ -1111,7 +1490,6 @@ document.addEventListener(
     }
 
 
-
     localStorage.setItem(
       'mr_yebra_spotify_expires_at',
 
@@ -1121,7 +1499,6 @@ document.addEventListener(
       ).toString()
 
     );
-
 
 
     localStorage.removeItem(
