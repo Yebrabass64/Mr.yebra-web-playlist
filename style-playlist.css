@@ -219,7 +219,7 @@
 
   align-items: center;
 
-  justify-content: center;
+  position: absolute;
 
   padding: 10px 18px;
 
