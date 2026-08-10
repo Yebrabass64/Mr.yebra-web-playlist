@@ -566,7 +566,7 @@
 
 /* Save on Spotify - estilo minimalista */
 .spotify-link {
-    color: #ffffff;
+    color: #ffffff !important;
     font-size: 14px;
     font-weight: 400;
     background: none;
@@ -576,6 +576,9 @@
 }
 
 .spotify-link:hover {
-    color: #ffffff;
+    color: #ffffff !important;
     text-decoration: underline;
+
+.spotify-link:visited {
+    color: #ffffff !important;
 }
