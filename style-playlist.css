@@ -289,7 +289,11 @@
    
   width: 100%;
 
-  background: #a92e21;
+  background: linear-gradient(
+    180deg,
+    #8a2b30 0%,
+    #6f2029 100%
+);
 
 }
 
