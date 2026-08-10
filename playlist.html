@@ -88,6 +88,22 @@ src="https://www.facebook.com/tr?id=302281599484821&ev=PageView&noscript=1"
 
 .spotify-track-list {
   width: 100%;
+  max-height: 186px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+   
+.spotify-track-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.spotify-track-list::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.35);
+  border-radius: 10px;
+}
+
+.spotify-track-list::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.12);
 }
 
 
@@ -1114,10 +1130,10 @@ document.addEventListener(
       '';
 
 
-    // Mostrar solamente las 3 primeras canciones
+    // Mostrar todas las canciones de la playlist
 
     const visibleTracks =
-      tracks.slice(0, 3);
+    tracks;
 
 
     visibleTracks.forEach(
