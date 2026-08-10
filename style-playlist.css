@@ -257,12 +257,21 @@
     position: absolute;
     top: 20px;
     right: 20px;
-    padding: 8px 14px;
-    background: white;
-    color: #111;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 600;
+
+    width: 36px;
+    height: 36px;
+
+    padding: 0;
+
+    background-color: white;
+    background-image: url("https://open.spotify.com/favicon.ico");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20px 20px;
+
+    border-radius: 50%;
+
+    font-size: 0;
     text-decoration: none;
 }
 
