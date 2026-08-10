@@ -537,3 +537,29 @@
   }
 
 }
+
+/* ===== Etiqueta Muestra ===== */
+
+.playlist-artist-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.playlist-label {
+    display: inline-block;
+
+    padding: 3px 7px;
+
+    border-radius: 3px;
+
+    background: rgba(0, 0, 0, 0.22);
+
+    color: white;
+
+    font-size: 11px;
+
+    font-weight: 500;
+
+    line-height: 1.2;
+}
